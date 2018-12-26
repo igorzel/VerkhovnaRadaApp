@@ -1,14 +1,11 @@
 package com.zel.igor.verkhovnarada.data.api.impl
 
 import com.google.gson.annotations.SerializedName
-import com.zel.igor.verkhovnarada.data.api.APIConfig
 import com.zel.igor.verkhovnarada.data.api.BillStatusesAPI
 import com.zel.igor.verkhovnarada.data.api.mapper.BillConsiderationStateMapper
 import com.zel.igor.verkhovnarada.data.model.BillStatus
 import io.reactivex.Observable
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import javax.inject.Inject
@@ -22,18 +19,6 @@ private interface BillStatusesApiService {
 
     @GET("legislation/2/bill-statuses/{date}/api/")
     fun fetchBillStatuses(@Path("date") date: String): Observable<List<BillStatusResponse>>
-
-    companion object Factory {
-        fun create(baseUrl: String): BillStatusesApiService {
-            val retrofit = Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(baseUrl)
-                .build()
-
-            return retrofit.create(BillStatusesApiService::class.java)
-        }
-    }
 }
 
 private class BillStatusMapper {
@@ -47,9 +32,9 @@ private class BillStatusMapper {
 }
 
 class BillStatusesAPIImpl
-@Inject constructor(private val apiConfig: APIConfig) : BillStatusesAPI {
+@Inject constructor(private val retrofit: Retrofit) : BillStatusesAPI {
     override fun fetchBillStatuses(date: String): Observable<List<BillStatus>> {
-        return BillStatusesApiService.create(apiConfig.baseUrl()).fetchBillStatuses(date)
+        return retrofit.create(BillStatusesApiService::class.java).fetchBillStatuses(date)
             .map { BillStatusMapper.map(it) }
     }
 }
