@@ -14,13 +14,9 @@ import dagger.Provides
 class RepositoryModule {
 
     @Provides
-    fun providesBillStatusesRepository(api: BillStatusesAPI): BillStatusesRepository {
-        return BillStatusesRepositoryImpl(api)
-    }
+    fun providesBillStatusesRepository(api: BillStatusesAPI): BillStatusesRepository = BillStatusesRepositoryImpl(api)
 
     @Provides
-    fun providesBillRepository(api: BillAPI): BillRepository {
-        return BillRepositoryImpl(api)
-    }
+    fun providesBillRepository(api: BillAPI): BillRepository = BillRepositoryImpl(api)
 
 }

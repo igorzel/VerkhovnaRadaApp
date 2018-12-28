@@ -15,8 +15,6 @@ class UseCaseModule {
     fun providesGetBillStatusesUseCase(
         billStatusesRepository: BillStatusesRepository,
         billRepository: BillRepository
-    ): GetBillStatusesUseCase {
-        return GetBillStatusesUseCaseImpl(billStatusesRepository, billRepository)
-    }
+    ): GetBillStatusesUseCase = GetBillStatusesUseCaseImpl(billStatusesRepository, billRepository)
 
 }

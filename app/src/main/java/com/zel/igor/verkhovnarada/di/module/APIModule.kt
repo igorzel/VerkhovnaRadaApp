@@ -15,17 +15,11 @@ import retrofit2.Retrofit
 class APIModule {
 
     @Provides
-    fun providesBillStatusesAPI(retrofit: Retrofit): BillStatusesAPI {
-        return BillStatusesAPIImpl(retrofit)
-    }
+    fun providesBillStatusesAPI(retrofit: Retrofit): BillStatusesAPI = BillStatusesAPIImpl(retrofit)
 
     @Provides
-    fun providesBillAPI(retrofit: Retrofit): BillAPI {
-        return BillAPIImpl(retrofit)
-    }
+    fun providesBillAPI(retrofit: Retrofit): BillAPI = BillAPIImpl(retrofit)
 
     @Provides
-    fun providesAPIConfig(): APIConfig {
-        return APIConfigImpl()
-    }
+    fun providesAPIConfig(): APIConfig = APIConfigImpl()
 }
