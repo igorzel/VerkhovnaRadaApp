@@ -7,8 +7,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -48,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+    init {
+        DaggerActivityComponent.create().inject(this)
+    }
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         billsList.layoutManager = LinearLayoutManager(this)
         billsList.adapter = billsListAdapter
 
-        DaggerActivityComponent.create().inject(this)
         viewModel = ViewModelProviders.of(this, this.viewModeFactory).get(MainActivityViewModel::class.java)
 
         viewModel.billStatuses().observe(this, Observer {

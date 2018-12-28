@@ -21,7 +21,7 @@ class MainActivityViewModel
     @SuppressLint("CheckResult")
     fun onViewAppeared() {
         billStatusesUseCase
-            .getBillStatuses("2018-12-22")
+            .getBillStatuses("2018-12-18")
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe({ result ->

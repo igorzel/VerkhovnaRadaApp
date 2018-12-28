@@ -8,7 +8,12 @@ class BillConsiderationStateMapper {
             return when (state) {
                 "Одержано проект" -> BillConsiderationState.Received
                 "Опрацьовується в комітеті" -> BillConsiderationState.InCommittee
+                "В порядок денний не включено" -> BillConsiderationState.NotIncludedInAgenda
                 "Очікує розгляду" -> BillConsiderationState.WaitingForConsideration
+                "Розгляд відкладено" -> BillConsiderationState.ConsiderationPostponed
+                "Знято з розгляду" -> BillConsiderationState.ConsiderationCanceled
+                "Готується на друге читання" -> BillConsiderationState.PreparingForSecondConsideration
+                "Готується на підпис" -> BillConsiderationState.PreparingForSign
                 "Закон підписано" -> BillConsiderationState.Signed
                 else -> BillConsiderationState.Unknown
             }
